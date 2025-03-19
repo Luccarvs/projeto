@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cep.css">
     <title>consulta CEP</title>
 </head>
 <body>
@@ -10,5 +11,20 @@
     <input type="text" id="cep" placeholder="Digite o CEO" maxlength="8">
     <button onclick="buscaCEP()">Buscar</button>
     <div id="resultado"></div>
+    <script>
+        function buscaCEP(){
+            let cep = document.getElementById("cep").value
+            let url = 'https://viacep.com.br/ws/${cep}/json';
+            fetch(url)
+            .then(response => response.json())
+            .then(data =>{
+                if(data.error){
+                    document.getElementById("resultado").innerHTML="CEP não encontrado"
+                } else {
+                    document.getElementById("resultado").innerHTML=""
+                }
+            })
+        }
+    </script>
 </body>
 </html>
